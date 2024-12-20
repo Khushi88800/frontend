@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Layout from '../Layout/Layout';
 
 function EmployeeDocuments() {
     const [frontPreview, setFrontPreview] = useState(null);
@@ -22,8 +23,10 @@ function EmployeeDocuments() {
         }
     };
     return (
-        <div className="w-full h-screen p-8 bg-white rounded-lg dark:bg-gray-800 dark:border-gray-700">
-            <form className="w-full max-w-screen-lg mx-auto">
+        <Layout>
+
+        <div className="w-full h-screen md:p-40 bg-white rounded-lg dark:bg-gray-800 dark:border-gray-700">
+            <form className="w-full max-w-screen-lg mx-auto ">
                 <h3 className="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">
                     Employee Documentation
                 </h3>
@@ -150,6 +153,7 @@ function EmployeeDocuments() {
                 </button>
             </form>
         </div>
+        </Layout>
 
 
 

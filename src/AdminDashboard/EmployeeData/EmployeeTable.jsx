@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { DeleteEmployeeById } from "../../Helpers/api";
-import { notify } from "../../utlis.js";
 import { FaEdit, FaTrashAlt, FaFileExcel, FaPrint } from "react-icons/fa"; // Import React icons
 import * as XLSX from "xlsx"; // Import xlsx library
+import toast from "react-hot-toast";
 
 function EmployeeTable({
   employees = [],
@@ -31,17 +31,20 @@ function EmployeeTable({
   };
 
   const handleDeleteEmployee = async (id) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this employee?"
+    );
+    if (!isConfirmed) {
+      return; // If user selects "No", exit the function.
+    }
+
     try {
-      const { success, message } = await DeleteEmployeeById(id);
-      if (success) {
-        notify(message, "success");
-      } else {
-        notify(message, "error");
-      }
+      await DeleteEmployeeById(id);
+      toast.success("Employee deleted successfully");
       fetchEmployees();
     } catch (err) {
       console.error(err);
-      notify("Failed to delete Employee", "error");
+      toast.error("Failed to delete Employee", "error");
     }
   };
 
@@ -50,7 +53,7 @@ function EmployeeTable({
       <td className="py-2 px-4">
         <Link
           to={`/employee/${employee._id}`}
-          className="text-blue-600 hover:underline"
+          className="text-black hover:underline"
         >
           {employee.name}
         </Link>
@@ -106,15 +109,12 @@ function EmployeeTable({
   return (
     <div className="w-full overflow-y-auto md:mb-4">
       <div className="flex float-right text-green-600 space-x-3 cursor-pointer text-2xl mb-4">
-        <FaFileExcel onClick={exportToExcel} /> {/* Excel Icon */}        
-        <FaPrint 
-        className="text-blue-600"
-        onClick={handlePrint} 
-         /> {/* Print Icon */}
-        
+        <FaFileExcel onClick={exportToExcel} /> {/* Excel Icon */}
+        <FaPrint className="text-blue-600" onClick={handlePrint} />{" "}
+        {/* Print Icon */}
       </div>
 
-      <table className="min-w-full table-auto border-collapse bg-white border border-gray-200">
+      <table className="min-w-full  table-auto border-collapse bg-white border border-gray-200">
         <thead className="">
           <tr>
             {headers.map((header, i) => (

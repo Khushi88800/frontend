@@ -91,6 +91,9 @@ function Dashboard({ onClose }) {
     setEmployeeObj(emp);
     setShowModal(true);
   };
+  const handleSearch = (e) => {
+    fetchEmployees(e.target.value);
+  };
 
   return (
     <>
@@ -113,6 +116,7 @@ function Dashboard({ onClose }) {
           <div className="p-1 cursor-pointer pr-1 float-end hidden lg:flex items-center w-56 justify-between max-w-sm border rounded-2xl focus-within:shadow-md ">
             <input
               type="search"
+              onChange={handleSearch}
               name="search"
               id="search"
               placeholder="Enter employee name.."
