@@ -12,7 +12,8 @@ import NotRequireAuth from './Helpers/Auth/NotRequireAuth'
 import Profile from './pages/users/Profile'
 import EditProfile from './pages/users/EditProfile'
 import Error from './pages/NotFound'
-import CreateEmployee from './AdminDashboard/CreateEmployee'
+import EmployeeManagementApp from './AdminDashboard/EmployeeData/EmployeeManagement'
+import EmployeeDetails from './AdminDashboard/EmployeeData/EmployeeDetails'
 
 function App() {
   return (
@@ -22,9 +23,9 @@ function App() {
         <Route path='/denied' element={<Deined />} />
         {/* Authenticated Routes */}
         <Route element={<NotRequireAuth />}>
-          <Route path="/login" element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Route>
+          <Route path="/login" element={<Login />} />
         <Route element={<RequireAuth allowedRoles={["USER", "ADMIN"]} />}>
           <Route path='/profile/me' element={<Profile />} />
           <Route path="/profile/edit" element={<EditProfile />} />
@@ -35,7 +36,10 @@ function App() {
         {/* Admin Dashboard */}
         <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path='/add' element={<CreateEmployee/>} />
+          <Route path="/" element={<Navigate to="employee" />} />
+          <Route path="/employee" element={<EmployeeManagementApp />} />
+          <Route path="/employee/:id" element={<EmployeeDetails />} />
+
         </Route>
         <Route path='*' element={<Error />} />
       </Routes>
