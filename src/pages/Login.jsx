@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../redux/userSlice";
+import Layout from "../Layout/Layout"
 
 function Login() {
   const navigate=useNavigate();
@@ -27,7 +28,7 @@ function Login() {
       }
       const res = await dispatch(login(credentials));
       if (res?.payload?.success) navigate("/");
-      console.log("Form submitted with credentials:", credentials);
+      // console.log("Form submitted with credentials:", credentials);
       setCredentials({
         email: "",
         password: "",
@@ -41,6 +42,7 @@ function Login() {
   };
 
   return (
+ 
     <div className="flex justify-center items-center min-h-screen w-full">
       <div className="w-full max-w-sm p-4  m-auto rounded-lg sm:p-6 md:p-8 ">
         <form noValidate className="space-y-6" onSubmit={(e) => handleOnSubmit(e)}>

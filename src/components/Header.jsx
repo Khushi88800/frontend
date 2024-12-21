@@ -4,24 +4,25 @@ import { Link } from 'react-router-dom';
 
 function Header() {
     const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
+    const userData = useSelector((state) => state?.auth?.data);
     const role = useSelector((state) => state?.auth?.role);
     return (
         <header className="sticky top-0 z-50 ">
             <div className="max-w-5xl mx-auto mt-4 flex items-center justify-between p-4 rounded-full bg-gray-100">
                 {/* Logo Section */}
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 rounded-full">
                     <img
-                        src="/logo.png"
+                        src="/logo.jpg"
                         alt="Logo"
                         className="w-10 h-10"
                     />
-                    <span className="text-indigo-500 font-bold text-lg">Varnav Infotech</span>
+                    {/* <span className="text-indigo-500 font-bold text-lg">Varnav Infotech</span> */}
                 </div>
 
                 {/* Navigation */}
                 <nav className="hidden md:flex items-center space-x-8 text-black">
                     <Link
-                        href="/"
+                        to="/"
                         className="relative hover:text-indigo-500 transition group"
                     >
                         Home
@@ -42,7 +43,7 @@ function Header() {
                         <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
                     </Link>
                     <Link
-                        href="/contact"
+                        to="/contactus"
                         className="relative hover:text-indigo-500 transition group"
                     >
                         Contact Us
@@ -64,10 +65,10 @@ function Header() {
                     {
                         isLoggedIn && role === "USER" && (
                             <Link
-                                href="/services"
+                                to="/markAttendence"
                                 className="relative hover:text-indigo-500 transition group"
                             >
-                                Services
+                                Attendence
                                 <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-indigo-500 transition-all duration-300 group-hover:w-full"></span>
                             </Link>
                         )
@@ -79,7 +80,7 @@ function Header() {
                 {/* Avatar */}
                 <Link to='/profile/me' className="relative group">
                     <img
-                        src="/avatar.png"
+                        src={userData?.avatar?.secure_url || "/usertwo.png"}
                         alt="Avatar"
                         className="w-10 h-10 rounded-full border-2 border-indigo-500"
                     />

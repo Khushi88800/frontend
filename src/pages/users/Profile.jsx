@@ -27,7 +27,7 @@ const Profile = () => {
     }, [dispatch]);
 
     return (
-        <div className="min-h-screen flex ">
+        <div className="min-h-screen flex select-none">
             {/* Left Sidebar */}
             {/* <div className="w-64 bg-cyan-800 text-white shadow-lg fixed inset-y-0 left-0 p-6 hidden lg:block">
                 <div className="text-2xl font-semibold mb-10">Dashboard</div>
@@ -74,7 +74,7 @@ const Profile = () => {
                                     <MdDashboard className="h-6 w-6 mr-2 text-white" />
                                     <Link to="/admin" className="hover:text-yellow-400">Dashboard</Link>
                                 </li>
-                                
+
                             )
                         }
                         <li className="flex items-center mb-6" onClick={handleLogout}>
@@ -108,11 +108,15 @@ const Profile = () => {
                         </h3>
 
                         <div className="grid grid-cols-2 gap-4">
-                            <p className="font-medium">Email:</p>
+                            <p className="font-medium">Email:-</p>
                             <p>{userData?.email}</p>
 
-                            <p className="font-medium">Role:</p>
+                            <p className="font-medium">Role:-</p>
                             <p>{userData?.role}</p>
+                            <p className="font-medium">Employee Id:-</p>
+                            <p>1</p>
+                            <p className="font-medium">Department:-</p>
+                            <p>IT</p>
                         </div>
 
                         {/* Action Buttons */}

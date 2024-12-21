@@ -114,20 +114,20 @@ const EditProfile = () => {
               name="fullName"
               id="fullName"
               placeholder="Enter your full name"
-              className="bg-transparent px-2 py-1 border"
+              className="select-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               value={data.fullName}
               onChange={setName}
             />
           </div>
 
           <Link to={"/profile/me"}>
-            <p className="link text-accent cursor-pointer flex items-center justify-center w-full gap-2">
+            <p className="link text-accent cursor-pointer flex items-center text-black justify-center w-full gap-2">
               <AiOutlineArrowLeft /> Back to Profile
             </p>
           </Link>
 
           <button
-            className="w-full bg-cyan-600 hover:bg-cyan-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg cursor-pointer"
+            className="w-full text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
             type="submit"
           >
             Update Profile
