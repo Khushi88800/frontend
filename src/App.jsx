@@ -12,9 +12,7 @@ import NotRequireAuth from './Helpers/Auth/NotRequireAuth'
 import Profile from './pages/users/Profile'
 import EditProfile from './pages/users/EditProfile'
 import Error from './pages/NotFound'
-import EmployeeManagementApp from './AdminDashboard/employeeData/EmployeeManagement'
-import EmployeeDetails from './AdminDashboard/employeeData/EmployeeDetails'
-import Contact from './pages/Contact'
+import CreateEmployee from './AdminDashboard/CreateEmployee'
 
 function App() {
   return (
@@ -28,6 +26,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Route>
+          <Route path="/login" element={<Login />} />
         <Route element={<RequireAuth allowedRoles={["USER", "ADMIN"]} />}>
           <Route path='/profile/me' element={<Profile />} />
           <Route path="/profile/edit" element={<EditProfile />} />
@@ -37,10 +36,8 @@ function App() {
         </Route>
         {/* Admin Dashboard */}
         <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
-          <Route path="/admin/*" element={<AdminDashboard />} />
-          <Route path="/" element={<Navigate to="employee" />} />
-          <Route path="/employee" element={<EmployeeManagementApp />} />
-          <Route path="/employee/:id" element={<EmployeeDetails />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path='/add' element={<CreateEmployee/>} />
         </Route>
         <Route path='*' element={<Error />} />
       </Routes>

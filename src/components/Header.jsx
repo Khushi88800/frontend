@@ -12,7 +12,7 @@ function Header() {
                 {/* Logo Section */}
                 <div className="flex items-center space-x-2 rounded-full">
                     <img
-                        src="/logo.jpg"
+                        src="/logo.png"
                         alt="Logo"
                         className="w-10 h-10"
                     />
@@ -80,7 +80,7 @@ function Header() {
                 {/* Avatar */}
                 <Link to='/profile/me' className="relative group">
                     <img
-                        src={userData?.avatar?.secure_url || "/usertwo.png"}
+                        src="/avatar.png"
                         alt="Avatar"
                         className="w-10 h-10 rounded-full border-2 border-indigo-500"
                     />

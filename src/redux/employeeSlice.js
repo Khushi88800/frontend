@@ -38,6 +38,7 @@ export const fetchEmployees = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.get("/employees");
+            toast.success("Employees Data fetched successfully",response.data)
             console.log("API Response:", response.data);
             return response.data; // Expecting an array of employee objects
         } catch (error) {

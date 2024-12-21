@@ -42,7 +42,6 @@ function Login() {
   };
 
   return (
- 
     <div className="flex justify-center items-center min-h-screen w-full">
       <div className="w-full max-w-sm p-4  m-auto rounded-lg sm:p-6 md:p-8 ">
         <form noValidate className="space-y-6" onSubmit={(e) => handleOnSubmit(e)}>
