@@ -8,13 +8,17 @@ const initialState = {
   data: (() => {
     try {
       const storedData = localStorage.getItem("data");
-      return storedData ? JSON.parse(storedData) : {}; // If storedData is null, return an empty object
+      return storedData ? JSON.parse(storedData) : {}; 
     } catch (error) {
-      return {}; // If parsing fails, return an empty object
+      return {}; 
     }
   })(),
   role: localStorage.getItem("role") || "",
+  users: [],
+  
 };
+console.log(localStorage.getItem('role')); // undefined आ रहा है?
+console.log(localStorage.getItem('isLoggedIn')); // true दिखा रहा है?
 
 // function to handle signup
 export const createAccount = createAsyncThunk("/auth/signup", async (data) => {
@@ -89,6 +93,18 @@ export const getUserData = createAsyncThunk("/user/details", async () => {
   }
 });
 
+// function to getAll users
+export const getAllUsers = createAsyncThunk(
+  "/user/getAllUsers",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get("/user/getAllUsers");
+      return response.data.users; // Assuming the API response contains the "users" array
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Failed to fetch users");
+    }
+  }
+);
 // function to change user password
 export const changePassword = createAsyncThunk(
   "/auth/changePassword",
@@ -132,7 +148,7 @@ export const forgetPassword = createAsyncThunk(
       res = await res;
       return res.data;
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error("Email is not registerd", error?.response?.data?.message);
     }
   }
 );
@@ -210,9 +226,22 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.data = action?.payload?.user;
         state.role = action?.payload?.user?.role;
+      })
+      //for all users
+      .addCase(getAllUsers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.users = action.payload;
+      })
+      .addCase(getAllUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
-export const {} = authSlice.actions;
+export const { } = authSlice.actions;
 export default authSlice.reducer;

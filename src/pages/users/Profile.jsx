@@ -66,8 +66,14 @@ const Profile = () => {
                         </li>
                         <li className="flex items-center mb-6">
                             <IoSettingsSharp className="h-6 w-6 mr-2 text-white" />
-                            <Link to="#" className="hover:text-yellow-400">Settings</Link>
+                            <Link to="/settings" className="hover:text-yellow-400">Settings</Link>
                         </li>
+                        <li className="flex items-center mb-6">
+                            <IoSettingsSharp className="h-6 w-6 mr-2 text-white" />
+                            <Link to="/settings" className="hover:text-yellow-400">Change-password
+                            </Link>
+                        </li>
+
                         {
                             isLoggedIn && role === "ADMIN" && (
                                 <li className="flex items-center mb-6">

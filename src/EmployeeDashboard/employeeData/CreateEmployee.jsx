@@ -24,7 +24,6 @@ function AddEmployee({ showModal, setShowModal, fetchEmployees, employeeObj }) {
         setEmployee({ ...employee, [name]: value });
     };
 
-
     const resetEmployeeStates = () => {
         setEmployee({
             name: '',
@@ -37,14 +36,21 @@ function AddEmployee({ showModal, setShowModal, fetchEmployees, employeeObj }) {
 
     const handleAddEmployee = async (e) => {
         e.preventDefault();
+        const isEmpty = Object.values(employee).some((value) => value.trim() === '');
+        if (isEmpty) {
+            toast.error('All fields are required');
+            return;
+        }
+        // console.log('API Response:', { success, message });
+
         try {
             const { success, message } = updateMode
                 ? await UpdateEmployeeById(employee, employee._id)
                 : await CreateEmployee(employee);
             if (success) {
-                toast.success("Employee added successfully".message)
+                toast.success(updateMode ? 'Employee updated successfully' : 'Employee added successfully');
             } else {
-                toast.error("Couldn't add employee", message)
+                toast.error(message || 'Error creating employee');
             }
             setShowModal(false);
             resetEmployeeStates();
@@ -52,7 +58,7 @@ function AddEmployee({ showModal, setShowModal, fetchEmployees, employeeObj }) {
             setUpdateMode(false);
         } catch (err) {
             console.error(err);
-            toast.error('Failed to create Employee', 'error');
+            toast.error("Failed to create employee",err)
         }
     };
 
@@ -64,12 +70,13 @@ function AddEmployee({ showModal, setShowModal, fetchEmployees, employeeObj }) {
 
     return (
         <div
-            className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ${showModal ? 'block' : 'hidden'
-                }`}
+            className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ${
+                showModal ? 'block' : 'hidden'
+            }`}
         >
             <div className="bg-white rounded-lg shadow-lg max-w-lg w-full mx-4">
                 <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                    <h5 className="text-xl font-semibold ">
+                    <h5 className="text-xl font-semibold">
                         {updateMode ? 'Update Employee' : 'Add Employee'}
                     </h5>
                     <button
@@ -81,7 +88,7 @@ function AddEmployee({ showModal, setShowModal, fetchEmployees, employeeObj }) {
                     </button>
                 </div>
                 <div className="p-4">
-                    <form onSubmit={handleAddEmployee} className="space-y-4">
+                    <form noValidate onSubmit={handleAddEmployee} className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                             <input
@@ -137,6 +144,7 @@ function AddEmployee({ showModal, setShowModal, fetchEmployees, employeeObj }) {
                                 required
                             />
                         </div>
+             
                         <button
                             type="submit"
                             className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-200"

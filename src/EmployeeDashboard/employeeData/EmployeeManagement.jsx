@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import EmployeeTable from './EmployeeTable';
-import AddEmployee from '../EmployeeData/CreateEmployee';
+import AddEmployee from '../employeeData/CreateEmployee';
 import { GetAllEmployees } from '../../Helpers/api';
-import { ToastContainer } from 'react-toastify';
 
 const EmployeeManagementApp = () => {
     const [showModal, setShowModal] = useState(false);
@@ -72,12 +71,7 @@ const EmployeeManagementApp = () => {
                     />
                 </div>
             </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={3000}
-                hideProgressBar={false}
-                className="text-sm"
-            />
+      
         </div>
     );
 };

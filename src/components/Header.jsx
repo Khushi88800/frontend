@@ -80,7 +80,7 @@ function Header() {
                 {/* Avatar */}
                 <Link to='/profile/me' className="relative group">
                     <img
-                        src="/avatar.png"
+                        src={userData?.avatar?.secure_url || "/usertwo.png"}
                         alt="Avatar"
                         className="w-10 h-10 rounded-full border-2 border-indigo-500"
                     />

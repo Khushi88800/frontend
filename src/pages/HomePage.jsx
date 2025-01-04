@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../Layout/Layout'
-import ashish from '../assets/banner-img-1.png'
+import Home from '../assets/banner-img-1.png'
 import { Link } from 'react-router-dom'
 
 function HomePage() {
@@ -17,7 +17,7 @@ function HomePage() {
           </p>
 
           {/* Buttons */}
-          <Link to="/documents" className="space-x-6">
+          <Link to="/employees/profile" className="space-x-6">
             <button className="sm:w-full lg:w-auto font-semibold my-2 border rounded md py-4 px-8 text-center bg-cyan-600 text-white hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:ring-opacity-50">
               Explore Company
             </button>
@@ -26,7 +26,7 @@ function HomePage() {
 
         {/* Right Section: Image */}
         <div className="w-1/2 flex items-center justify-center">
-          <img src={ashish} alt="home page image" />
+          <img src={Home} alt="home page image" />
         </div>
       </div>
     </Layout>
