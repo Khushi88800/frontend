@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from 'react'
 import Login from './pages/Login'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Register from './pages/Register'
-// import HomePage from './pages/HomePage'
 const HomePage = lazy(() => import("./pages/HomePage"))
 import Deined from './pages/Deined'
 const AdminDashboard = lazy(() => import('./AdminDashboard/AdminDashboard'))
